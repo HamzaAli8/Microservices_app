@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/cart.css" th:href="@{/css/cart.css}"/>
+</head>
+<div id="app">
+
+    <!-- Header -->
+    <header class="container">
+        <h1>Shopping Cart</h1>
+        <ul class="breadcrumb">
+            <li>
+                <a th:href="@{/items}"> Home </a>
+            </li>
+            <li>Shopping Cart</li>
+        </ul>
+        <div style="float: right">Items currently in your cart</div><span class="count" th:text="${#lists.size(cartItems)}"></span>
+    </header>
+    <!-- End Header -->
+
+    <!-- Product List -->
+    <section class="container">
+        <div v-if="products.length > 0">
+            <ul class="products">
+                <li class="row" th:each="cartItem : ${cartItems}">
+                    <div class="col left">
+                        <div class="thumbnail">
+                            <a href="#">
+                                <img th:src="@{/images/stock/default.png}" />
+                            </a>
+                        </div>
+                        <div class="detail">
+                            <div class="name" th:text="${cartItem.name}" th:name="name"><a href="#"></a></div>
+                            <div class="description" th:text="${cartItem.description}" th:name="description"></div>
+                            <div class="price"></div>
+                        </div>
+                    </div>
+
+                    <div class="col right">
+                            <form  action="#" th:method="post" th:action="@{/update/__${cartItem.id}__/__${cartItem.amount}__}" class="quantity">
+                                <input type="number" class="quantity" id="amount"  th:value="*{__${cartItem.amount}__}" name="amount" />
+                                <button class="btn btn-primary" type="submit" >Update</button>
+                            </form>
+                        <div class="remove">
+                            <form  action="#" th:method="delete" th:action="@{/remove/__${cartItem.id}__}" th:name="id" >
+                                <button class="btn btn-danger" type="submit" >Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div th:object=${cartItems} th:if="${not #lists.isEmpty(cartItems)}">
+            <p></p>
+        </div>
+        <div th:unless="${not #lists.isEmpty(cartItems)}" class="empty-product">
+            <h3>There are no products in your cart.</h3>
+            <button>Shopping now</button>
+        </div>
+    </section>
+
+    <section class="container" v-if="products.length > 0">
+        <div class="promotion">
+            <label for="promo-code">Have A Promo Code?</label>
+            <input type="text" id="promo-code" /> <button type="button" ></button>
+        </div>
+
+        <div class="summary">
+            <ul>
+                <li>Subtotal <span></span></li>
+                <li >Discount <span></span></li>
+                <li class="total">Total <span></span></li>
+            </ul>
+        </div>
+        <div class="checkout">
+            <button type="button">Check Out</button>
+        </div>
+    </section>
+</div>

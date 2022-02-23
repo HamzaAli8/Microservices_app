@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Items for Sale</title>
+<div th:replace="header::myHeader"/>
+</head>
+<body>
+<header th:replace="header :: navbar"></header>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Item Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${ #lists.isEmpty(items)}">
+            <td>0</td>
+        </tr>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.itemId}" th:name="itemId"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.description}"></td>
+            <td>
+                <form  action="#" method="post" th:action="@{/add/__${item.itemId}__}" >
+
+                    <button class="btn btn-primary" type="submit" >Add</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
