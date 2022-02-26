@@ -45,11 +45,12 @@
         </div>
         <div th:unless="${not #lists.isEmpty(cartItems)}" class="empty-product">
             <h3>There are no products in your cart.</h3>
-            <button>Shopping now</button>
+           <a th:href="@{/items}"> <button>Shopping now</button>
+            </a>
         </div>
     </section>
 
-    <section class="container" v-if="products.length > 0">
+    <section class="container" th:if="${not #lists.isEmpty(cartItems)}">
         <div class="checkout">
             <button type="button">Check Out</button>
         </div>
