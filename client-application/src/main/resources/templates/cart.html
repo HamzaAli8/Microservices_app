@@ -1,23 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" media="all"
-          href="../static/css/cart.css" th:href="@{/css/cart.css}"/>
+    <title>Items for Sale</title>
+    <div th:replace="header::myHeader"/>
 </head>
-<div id="app">
-
-    <!-- Header -->
-    <header class="container">
-        <h1>Shopping Cart</h1>
-        <ul class="breadcrumb">
-            <li>
-                <a th:href="@{/items}"> Home </a>
-            </li>
-            <li>Shopping Cart</li>
-        </ul>
-        <div style="float: right">Items currently in your cart</div><span class="count" th:text="${#lists.size(cartItems)}"></span>
-    </header>
+<body>
+<header th:replace="header :: navbar"></header>
     <!-- End Header -->
 
     <!-- Product List -->
@@ -62,20 +50,9 @@
     </section>
 
     <section class="container" v-if="products.length > 0">
-        <div class="promotion">
-            <label for="promo-code">Have A Promo Code?</label>
-            <input type="text" id="promo-code" /> <button type="button" ></button>
-        </div>
-
-        <div class="summary">
-            <ul>
-                <li>Subtotal <span></span></li>
-                <li >Discount <span></span></li>
-                <li class="total">Total <span></span></li>
-            </ul>
-        </div>
         <div class="checkout">
             <button type="button">Check Out</button>
         </div>
     </section>
-</div>
+</body>
+<html/>

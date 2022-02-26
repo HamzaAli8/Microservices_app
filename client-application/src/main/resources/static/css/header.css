@@ -1,6 +1,6 @@
 .navigation {
   height: 70px;
-  background: #44ab57;
+  background: #16cc9b;
 }
 
 .nav-container {
@@ -43,7 +43,7 @@ nav ul li a:visited {
   display: block;
   padding: 0 20px;
   line-height: 70px;
-  background: #44ab57;
+  background: #16cc9b;
   color: #ffffff;
   text-decoration: none;
 }
@@ -60,7 +60,7 @@ nav ul li a:visited:hover {
   position: absolute;
   top: 0;
   right: 0;
-  background: #44ab57;
+  background: #16cc9b;
   height: 70px;
   width: 70px;
 }

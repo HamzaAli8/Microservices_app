@@ -8,10 +8,15 @@ import co.codingnomads.spring.clientapplication.services.CartService;
 import co.codingnomads.spring.clientapplication.services.ItemService;
 import co.codingnomads.spring.clientapplication.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +60,11 @@ public class ViewController {
             c.setName(item.getName());
         }
 
-        model.addAttribute("cartItems", cartItems );
+            model.addAttribute("cartItems", cartItems);
 
-        return "cart";
+            return "cart";
+
+
     }
 
 
@@ -74,6 +81,8 @@ public class ViewController {
     public String register(Model model){
         User user = User.builder().build();
         model.addAttribute("user", user);
+
+
         return "register";
     }
 
@@ -83,7 +92,7 @@ public class ViewController {
         userService.createUser(user);
 
 
-        return "redirect: /";
+        return "redirect:success";
     }
 
 
@@ -123,4 +132,22 @@ public class ViewController {
 
         return "redirect:/cart";
     }
+
+    @GetMapping
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout";
+    }
+
+    @GetMapping("/success")
+    public String successPage(){
+
+
+        return "success";
+    }
+
+
 }
