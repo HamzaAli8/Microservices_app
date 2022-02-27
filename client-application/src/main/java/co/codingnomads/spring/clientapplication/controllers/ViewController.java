@@ -35,12 +35,20 @@ public class ViewController {
     CartService cartService;
 
 
+
+    @GetMapping("/")
+    public String loginPage(){
+
+
+        return "login";
+    }
+
     @GetMapping("/items")
     public String displayItems(Model model, Principal principal){
 
         User user = userService.getUserByUserName(principal.getName());
         model.addAttribute("items", itemService.getAllItems());
-        model.addAttribute(user);
+        model.addAttribute("user",user);
         return "item-list";
     }
 
@@ -61,10 +69,19 @@ public class ViewController {
         }
 
             model.addAttribute("cartItems", cartItems);
+            model.addAttribute("user", user);
 
             return "cart";
 
 
+    }
+
+    @GetMapping("/error")
+    public String errorPage (){
+
+
+
+        return "error";
     }
 
 

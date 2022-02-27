@@ -32,6 +32,9 @@
                 <li>
                     <a th:href="@{/logout}">Sign out</a>
                 </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()"> Welcome, <span sec:authentication="name"> Welcome Guest</span>
+                </li>
             </ul>
         </nav>
     </div>
